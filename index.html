@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Import Conversion Tool</title>
+    <link rel="stylesheet" href="styles.css">
+	<script>
+        function startDownloadAndRedirect() {
+            // Create a temporary link to download the file
+            var iframe = document.createElement('iframe');
+            iframe.style.display = 'none';
+            iframe.src = 'process_file.php'; // URL to process_file.php
+            document.body.appendChild(iframe);
+
+            // After a short delay, redirect to result_conversion.php
+            setTimeout(function() {
+                window.location.href = 'result_conversion.php';
+            }, 2000); // Adjust the delay as necessary
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Employee/List Import Conversion Tool</h1>
+        <form action="process_file.php" method="post" enctype="multipart/form-data" onsubmit="startDownloadAndRedirect(); return true;">
+			<div class="upload-box">
+				<h2>Choose which type of conversion</h2>
+				<ul><li><input type="radio" id="Employee" name="Conversion_type" value="Employee" checked>
+				<label for="Employee">Employee</label></li>
+				<li><input type="radio" id="List" name="Conversion_type" value="List">
+				<label for="List">List</label></li></ul>
+			</div>
+			
+            <div class="upload-box">
+                <label for="file">Select an Excel file:</label>
+                <input type="file" name="file" id="file" accept=".xlsx, .xls" required>
+            </div>
+            <button type="submit" class="btn">Upload and Convert</button>
+        </form>
+    </div>
+</body>
+</html>
